@@ -34,6 +34,7 @@ namespace WindowsPhone510537.Views {
         protected override void OnNavigatedTo(NavigationEventArgs e) {
             var message = (Message)e.Parameter;
             DataContext = message;
+            Windows.Phone.UI.Input.HardwareButtons.BackPressed += OnBackPressed;
         }
 
         public void OnBackPressed(object sender, BackPressedEventArgs e) {

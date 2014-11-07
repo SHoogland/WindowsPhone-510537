@@ -32,8 +32,9 @@
                         </Border>
 
                         <StackPanel Grid.Column="2">
-                            <TextBlock Text="{Binding TimePosted}" TextWrapping="WrapWholeWords" FontSize="{StaticResource TextStyleExtraLargeFontSize}" />
+                            <TextBlock Text="{Binding Title}" TextWrapping="WrapWholeWords" FontSize="{StaticResource TextStyleExtraLargeFontSize}" />
                             <TextBlock Text="{Binding TextPreview}" TextWrapping="WrapWholeWords" Style="{ThemeResource ListViewItemContentTextBlockStyle}" />
+                            <TextBlock Text="{Binding TimePosted}" TextWrapping="WrapWholeWords" FontSize="10" />
                         </StackPanel>
                     </Grid>
                 </DataTemplate>
