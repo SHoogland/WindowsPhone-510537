@@ -10,7 +10,8 @@
 
     <Grid >
         <TextBlock Text="Messages" FontSize="40"></TextBlock>
-        <ListView ItemsSource="{Binding Messages}" Margin="0,50,0,0">
+        
+        <ListView ItemsSource="{Binding Messages}" Margin="0,50">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -38,5 +39,7 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+
+        <AppBarButton Command="{Binding NavigateToAddMessagePageCommand}" Icon="Add" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="52" Margin="160,0,160,5"></AppBarButton>
     </Grid>
 </Page>
