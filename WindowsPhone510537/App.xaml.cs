@@ -23,6 +23,7 @@ namespace WindowsPhone510537 {
     /// Provides application-specific behavior to supplement the default Application class.
     /// </summary>
     public sealed partial class App : Application {
+        public static bool DidPublishMessage { get; set; }
         private TransitionCollection transitions;
 
         /// <summary>

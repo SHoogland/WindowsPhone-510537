@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -12,6 +13,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using WindowsPhone510537.Services;
 using WindowsPhone510537.ViewModels;
 
 namespace WindowsPhone510537 {
@@ -26,6 +28,15 @@ namespace WindowsPhone510537 {
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e) {
+            if (App.DidPublishMessage) {
+                App.DidPublishMessage = false;
+                var messages = (MainViewModel)MessagesView.DataContext;
+                var specialMessageList = (ObservableIncrementalLoadingCollection)messages.Messages;
+                specialMessageList.Clear();
+                specialMessageList.LatestId = 0;
+                specialMessageList.LoadMoreItemsAsync(5);
+            }
+
             // TODO: Prepare page for display here.
 
             // TODO: If your application contains multiple pages, ensure that you are

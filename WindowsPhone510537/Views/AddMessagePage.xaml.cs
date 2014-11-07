@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -13,8 +14,6 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
 namespace WindowsPhone510537.Views {
     /// <summary>
@@ -39,6 +38,23 @@ namespace WindowsPhone510537.Views {
             if (rootFrame != null && rootFrame.CanGoBack) {
                 rootFrame.GoBack();
                 e.Handled = true;
+            }
+        }
+
+        private async void Post_Message(object sender, RoutedEventArgs e) {
+            HttpClient client = new HttpClient();
+
+            var parameters = new Dictionary<string, string>
+            {
+                {"Title", messageTitle.Text},
+                {"Text", messageText.Text}
+            };
+            var content = new FormUrlEncodedContent(parameters);
+            var response = await client.PostAsync("http://wpinholland.azurewebsites.net/API/Messages", content);
+            Frame rootFrame = Window.Current.Content as Frame;
+            if (rootFrame != null && rootFrame.CanGoBack) {
+                App.DidPublishMessage = true;
+                rootFrame.GoBack();
             }
         }
     }

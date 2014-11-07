@@ -8,7 +8,13 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    <StackPanel Margin="10,10,10,0">
+        <TextBlock FontSize="40" FontFamily="PhoneFontFamilySemiLight" Text="Add Message" />
+        <TextBlock Text="Title" Style="{StaticResource BodyTextBlockStyle}"/>
+        <TextBox x:Name="messageTitle" />
+        <TextBlock Text="Message" Style="{StaticResource BodyTextBlockStyle}"/>
+        <TextBox x:Name="messageText" TextWrapping="Wrap" Height="200" AcceptsReturn="True"/>
+        <Button Click="Post_Message">Post Message</Button>
 
-    </Grid>
+    </StackPanel>
 </Page>

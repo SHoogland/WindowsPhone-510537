@@ -11,7 +11,7 @@
     <Grid >
         <TextBlock Text="Messages" FontSize="40"></TextBlock>
         
-        <ListView ItemsSource="{Binding Messages}" Margin="0,50">
+        <ListView ItemsSource="{Binding Messages}" Margin="0,50" Name="MessagesView">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
