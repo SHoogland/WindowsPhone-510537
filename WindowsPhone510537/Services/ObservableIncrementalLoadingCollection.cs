@@ -35,6 +35,9 @@ namespace WindowsPhone510537.Services {
                     messages = JsonConvert.DeserializeObject<MessagesResponse>(json);
                     Debug.WriteLine("request done" + LatestId);
                     foreach (var message in messages.Messages) {
+                        DateTime epoch = new DateTime(1970, 1, 1, 0, 0, 0, 0).ToLocalTime();
+                        epoch.AddSeconds(message.Timestamp);
+                        message.TimePosted = epoch.ToString("mm:hh dd-MM-yyyy");
                         if (!string.IsNullOrWhiteSpace(message.ImageUrl)) {
                             message.Image = new BitmapImage(new Uri(message.ImageUrl));
                         }

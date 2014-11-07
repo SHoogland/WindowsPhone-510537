@@ -7,6 +7,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Phone.UI.Input;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -42,19 +43,33 @@ namespace WindowsPhone510537.Views {
         }
 
         private async void Post_Message(object sender, RoutedEventArgs e) {
-            HttpClient client = new HttpClient();
-
-            var parameters = new Dictionary<string, string>
+            if (!string.IsNullOrWhiteSpace(messageTitle.Text) && !string.IsNullOrWhiteSpace(messageText.Text)) {
+                HttpClient client = new HttpClient();
+                var parameters = new Dictionary<string, string>
             {
                 {"Title", messageTitle.Text},
                 {"Text", messageText.Text}
             };
-            var content = new FormUrlEncodedContent(parameters);
-            var response = await client.PostAsync("http://wpinholland.azurewebsites.net/API/Messages", content);
-            Frame rootFrame = Window.Current.Content as Frame;
-            if (rootFrame != null && rootFrame.CanGoBack) {
-                App.DidPublishMessage = true;
-                rootFrame.GoBack();
+                var content = new FormUrlEncodedContent(parameters);
+                try {
+                    var response = await client.PostAsync("http://wpinholland.azurewebsites.net/API/Messages", content);
+                    response.EnsureSuccessStatusCode();
+                }
+                catch {
+                    var dialog = new MessageDialog("Something went wrong... Do you have internet?");
+                    dialog.Commands.Add(new UICommand("ok"));
+                    dialog.ShowAsync();
+                }
+                Frame rootFrame = Window.Current.Content as Frame;
+                if (rootFrame != null && rootFrame.CanGoBack) {
+                    App.DidPublishMessage = true;
+                    rootFrame.GoBack();
+                }
+            }
+            else {
+                var dialog = new MessageDialog("Did you fill in all the fields?");
+                dialog.Commands.Add(new UICommand("nope i didnt"));
+                dialog.ShowAsync();
             }
         }
     }

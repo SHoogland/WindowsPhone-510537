@@ -1,0 +1,20 @@
+﻿<Page
+    x:Class="WindowsPhone510537.Views.DetailPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:WindowsPhone510537.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <StackPanel Margin="10,10,10,0">
+        <TextBlock FontSize="40" FontFamily="PhoneFontFamilySemiLight" Text="Details" />
+        <Border Height="300">
+            <Image Source="{Binding Image}" />
+        </Border>
+        <TextBlock Text="{Binding Title}" Style="{StaticResource BodyTextBlockStyle}"/>
+        <TextBlock Text="{Binding Text}" Style="{StaticResource BodyTextBlockStyle}"/>
+
+    </StackPanel>
+</Page>

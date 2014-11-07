@@ -10,8 +10,8 @@
 
     <Grid >
         <TextBlock Text="Messages" FontSize="40"></TextBlock>
-        
-        <ListView ItemsSource="{Binding Messages}" Margin="0,50" Name="MessagesView">
+
+        <ListView ItemsSource="{Binding Messages}" Margin="0,50" Name="MessagesView" IsItemClickEnabled="True" ItemClick="MainListView_ItemClick">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -32,7 +32,7 @@
                         </Border>
 
                         <StackPanel Grid.Column="2">
-                            <TextBlock Text="{Binding Title}" TextWrapping="WrapWholeWords" FontSize="{StaticResource TextStyleExtraLargeFontSize}" />
+                            <TextBlock Text="{Binding TimePosted}" TextWrapping="WrapWholeWords" FontSize="{StaticResource TextStyleExtraLargeFontSize}" />
                             <TextBlock Text="{Binding TextPreview}" TextWrapping="WrapWholeWords" Style="{ThemeResource ListViewItemContentTextBlockStyle}" />
                         </StackPanel>
                     </Grid>

@@ -14,5 +14,6 @@ namespace WindowsPhone510537.Models {
         public string ImageUrl { get; set; }
         public ImageSource Image { get; set; }
         public int Timestamp { get; set; }
+        public string TimePosted { get; set; }
     }
 }

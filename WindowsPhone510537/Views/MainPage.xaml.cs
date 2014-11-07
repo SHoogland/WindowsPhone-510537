@@ -13,8 +13,10 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using WindowsPhone510537.Models;
 using WindowsPhone510537.Services;
 using WindowsPhone510537.ViewModels;
+using WindowsPhone510537.Views;
 
 namespace WindowsPhone510537 {
 
@@ -44,6 +46,13 @@ namespace WindowsPhone510537 {
             // Windows.Phone.UI.Input.HardwareButtons.BackPressed event.
             // If you are using the NavigationHelper provided by some templates,
             // this event is handled for you.
+        }
+        
+        private void MainListView_ItemClick(object sender, ItemClickEventArgs e) {
+            var clickedMessage = (Message)e.ClickedItem;
+            ((Frame)Window.Current.Content).Navigate(typeof(DetailPage), clickedMessage);
+            // Navigate to the new page
+
         }
     }
 }
