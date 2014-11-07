@@ -9,13 +9,14 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid >
-        <ListView ItemsSource="{Binding Messages}">
-            <!--<ListView.ItemContainerStyle>
+        <TextBlock Text="Messages" FontSize="40"></TextBlock>
+        <ListView ItemsSource="{Binding Messages}" Margin="0,50,0,0">
+            <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                     <Setter Property="Margin" Value="0,0,0,20" />
                 </Style>
-            </ListView.ItemContainerStyle>-->
+            </ListView.ItemContainerStyle>
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid>
@@ -31,7 +32,7 @@
 
                         <StackPanel Grid.Column="2">
                             <TextBlock Text="{Binding Title}" TextWrapping="WrapWholeWords" FontSize="{StaticResource TextStyleExtraLargeFontSize}" />
-                            <TextBlock Text="{Binding Text}" TextWrapping="WrapWholeWords" Style="{ThemeResource ListViewItemContentTextBlockStyle}" />
+                            <TextBlock Text="{Binding TextPreview}" TextWrapping="WrapWholeWords" Style="{ThemeResource ListViewItemContentTextBlockStyle}" />
                         </StackPanel>
                     </Grid>
                 </DataTemplate>

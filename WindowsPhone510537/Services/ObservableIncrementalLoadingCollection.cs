@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
@@ -14,26 +15,45 @@ using WindowsPhone510537.Models;
 
 namespace WindowsPhone510537.Services {
     public class ObservableIncrementalLoadingCollection : ObservableCollection<Message>, ISupportIncrementalLoading {
+        public bool IsGettingData = false;
+        public int LatestId = 0;
+
         public IAsyncOperation<LoadMoreItemsResult> LoadMoreItemsAsync(uint count) {
             return AsyncInfo.Run(async c => {
-                HttpClient client = new HttpClient();
-                string json = await client.GetStringAsync(new Uri("http://wpinholland.azurewebsites.net/API/Messages"));
-
-                var messages = new MessagesResponse();
-                messages = JsonConvert.DeserializeObject<MessagesResponse>(json);
-                
-                foreach (var message in messages.Messages) {
-                    if (!string.IsNullOrWhiteSpace(message.ImageUrl)) {
-                        message.Image = new BitmapImage(new Uri(message.ImageUrl));
+                if (!IsGettingData) {
+                    IsGettingData = true;
+                    HttpClient client = new HttpClient();
+                    string json = "";
+                    if (LatestId == 0) {
+                        json = await client.GetStringAsync(new Uri("http://wpinholland.azurewebsites.net/API/Messages"));
                     }
                     else {
-                        message.Image = new BitmapImage(new Uri("http://www.silvermorgandollar.com/images/no_image.gif"));
+                        json = await client.GetStringAsync(new Uri("http://wpinholland.azurewebsites.net/API/Messages/" + LatestId));
                     }
-                    Add(message);
-                }
 
+                    var messages = new MessagesResponse();
+                    messages = JsonConvert.DeserializeObject<MessagesResponse>(json);
+                    Debug.WriteLine("request done" + LatestId);
+                    foreach (var message in messages.Messages) {
+                        if (!string.IsNullOrWhiteSpace(message.ImageUrl)) {
+                            message.Image = new BitmapImage(new Uri(message.ImageUrl));
+                        }
+                        else {
+                            message.Image = new BitmapImage(new Uri("http://www.silvermorgandollar.com/images/no_image.gif"));
+                        }
+                        if (message.Text.Count() > 31) {
+                            message.TextPreview = message.Text.Substring(0, 30).Replace("\n", "").Replace("\r", "");
+                        }
+                        else {
+                            message.TextPreview = message.Text.Replace("\n", "").Replace("\r", "");
+                        }
+                        Add(message);
+                    }
+                    LatestId = messages.Messages.Last().ID;
+                    IsGettingData = false;
+                }
                 return new LoadMoreItemsResult {
-                    Count = 50
+                    Count = 20
                 };
             });
         }
