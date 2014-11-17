@@ -7,15 +7,16 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <ScrollViewer>
+        <StackPanel Margin="10,10,10,0">
+            <TextBlock FontSize="40" FontFamily="PhoneFontFamilySemiLight" Text="Details" />
+            <Border Height="300">
+                <Image Source="{Binding Image}" />
+            </Border>
+            <TextBlock Text="{Binding TimePosted}" Style="{StaticResource BodyTextBlockStyle}"/>
+            <TextBlock Text="{Binding Title}" Style="{StaticResource BodyTextBlockStyle}"/>
+            <TextBlock Text="{Binding Text}" Style="{StaticResource BodyTextBlockStyle}"/>
 
-    <StackPanel Margin="10,10,10,0">
-        <TextBlock FontSize="40" FontFamily="PhoneFontFamilySemiLight" Text="Details" />
-        <Border Height="300">
-            <Image Source="{Binding Image}" />
-        </Border>
-        <TextBlock Text="{Binding TimePosted}" Style="{StaticResource BodyTextBlockStyle}"/>
-        <TextBlock Text="{Binding Title}" Style="{StaticResource BodyTextBlockStyle}"/>
-        <TextBlock Text="{Binding Text}" Style="{StaticResource BodyTextBlockStyle}"/>
-
-    </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
 </Page>
