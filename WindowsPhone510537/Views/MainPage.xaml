@@ -41,6 +41,14 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <AppBarButton Command="{Binding NavigateToAddMessagePageCommand}" Icon="Add" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="52" Margin="160,0,160,5"></AppBarButton>
     </Grid>
+    <Page.BottomAppBar>
+        <CommandBar Height="33">
+            <AppBarButton Command="{Binding NavigateToAddMessagePageCommand}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="52" Margin="160,0,160,5">
+                <AppBarButton.Icon>
+                    <SymbolIcon Height="40" Symbol="Add" VerticalAlignment="Top"/>
+                </AppBarButton.Icon>
+            </AppBarButton>
+        </CommandBar>
+    </Page.BottomAppBar>
 </Page>
